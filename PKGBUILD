@@ -1,10 +1,11 @@
-# Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Maintainer: kpcyrd <kpcyrd[at]archlinux[dot]org>
+# Contributor: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
-pkgbase=linux
-pkgver=6.3.4.arch2
+pkgbase=linux-reproducible
+pkgver=6.3.4.reproducible2
 pkgrel=1
-pkgdesc='Linux'
-_srctag=v${pkgver%.*}-${pkgver##*.}
+pkgdesc='Reproducible Linux'
+_srctag=v${pkgver//.reproducible/-arch}
 url="https://github.com/archlinux/linux/commits/$_srctag"
 arch=(x86_64)
 license=(GPL2)
@@ -30,6 +31,7 @@ _srcname=archlinux-linux
 source=(
   "$_srcname::git+https://github.com/archlinux/linux?signed#tag=$_srctag"
   config  # the main kernel config file
+  reproducible-btf-pahole.patch
 )
 validpgpkeys=(
   ABAF11C65A2970B130ABE3C479BE3E4300411886  # Linus Torvalds
@@ -38,7 +40,8 @@ validpgpkeys=(
   C7E7849466FE2358343588377258734B41C31549  # David Runge <dvzrv@archlinux.org>
 )
 b2sums=('SKIP'
-        'c2d1c69265adc041dc0364e448f6e86dc4c9ca1207c84071abc1675dd820534a8ab5a230e579e68bfb1bf2b861f23ad34e090f8ceaef5e265ea95e2bc6946013')
+        '076bb340d37ce151b7db1a74c2430eec97b6559da586cb81c9eb26a09648bed8845b0e5d356971694122003a2ca045b2f3e7a4d53c2f9fa6050f16da7bddeef3'
+        'da502313c3f2b993b93f59c5ef6679c4393f59e6276766ad79bad099d82dd3fe7743b33a0c28dc9f7ff296c762338b664ec7d0624e7c623056445a966fce1fc7')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
